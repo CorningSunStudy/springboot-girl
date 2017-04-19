@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by corning on 2017/4/19.
  */
 @RestController
+@RequestMapping("/hello")
 public class HelloController {
 
     @Autowired
     private GirlProperties girlProperties;
 
-    @RequestMapping(value = {"/hello", "/hi"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/say", method = RequestMethod.GET)
     public String say() {
         return girlProperties.getCupSize();
     }
