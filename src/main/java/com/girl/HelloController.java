@@ -17,7 +17,7 @@ public class HelloController {
     private GirlProperties girlProperties;
 
     @RequestMapping(value = "/say", method = RequestMethod.GET)
-    public String say(@RequestParam("id") Integer id) {
+    public String say(@RequestParam(value = "id", required = false, defaultValue = "0") Integer id) {
         return "id: " + id;
     }
 }
