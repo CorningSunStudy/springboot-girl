@@ -15,7 +15,7 @@ public class HelloController {
     @Autowired
     private GirlProperties girlProperties;
 
-    @RequestMapping(value = "/say", method = RequestMethod.GET)
+    @RequestMapping(value = "/say", method = RequestMethod.POST)
     public String say() {
         return girlProperties.getCupSize();
     }
