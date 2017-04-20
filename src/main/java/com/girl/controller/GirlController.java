@@ -1,8 +1,10 @@
 package com.girl.controller;
 
 import com.girl.domain.Girl;
+import com.girl.domain.Result;
 import com.girl.repository.GirlRepository;
 import com.girl.service.GirlService;
+import com.girl.utils.ResultUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,12 +46,11 @@ public class GirlController {
      * @return
      */
     @PostMapping(value = "/girls")
-    public Girl girlAdd(@Valid Girl girl, BindingResult bindingResult) {
+    public Result<Girl> girlAdd(@Valid Girl girl, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            System.out.println(bindingResult.getFieldError().getDefaultMessage());
-            return null;
+            return ResultUtil.error(1, bindingResult.getFieldError().getDefaultMessage());
         }
-        return girlRepository.save(girl);
+        return ResultUtil.success(girlRepository.save(girl));
     }
 
     /**
@@ -101,6 +102,12 @@ public class GirlController {
     @PostMapping(value = "girls/two")
     public void girlTow() {
         girlService.insertTwo();
+    }
+
+    @GetMapping(value = "girls/getAge/{id}")
+    public Result getAge(@PathVariable("id") Integer id) {
+
+        return ResultUtil.success(girlService.getAge(id));
     }
 
 }

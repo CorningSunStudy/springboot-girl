@@ -28,4 +28,15 @@ public class GirlService {
 
     }
 
+
+    public String  getAge(Integer id) {
+        Girl girl = girlRepository.findOne(id);
+        Integer age = girl.getAge();
+        if (age < 10) {
+            return "你还在上小学吧";
+        } else if (age > 10 && age < 16) {
+            return "你可能在上初中";
+        }
+    }
+
 }
