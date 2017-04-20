@@ -1,5 +1,6 @@
 package com.girl.service;
 
+import com.girl.enums.ResultEnum;
 import com.girl.exception.GirlException;
 import com.girl.repository.GirlRepository;
 import com.girl.domain.Girl;
@@ -34,9 +35,9 @@ public class GirlService {
         Girl girl = girlRepository.findOne(id);
         Integer age = girl.getAge();
         if (age < 10) {
-            throw new GirlException("你还在上小学吧", 100);
+            throw new GirlException(ResultEnum.PRIMARY_SCHOOL);
         } else if (age > 10 && age < 16) {
-            throw new GirlException("你可能在上初中", 101);
+            throw new GirlException(ResultEnum.MIDDLE_SCHOOL);
         }
 
     }
