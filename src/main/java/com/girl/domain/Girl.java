@@ -1,8 +1,9 @@
-package com.girl;
+package com.girl.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
 
 /**
  * Created by corning on 2017/4/20.
@@ -16,6 +17,7 @@ public class Girl {
 
     private String name;
 
+    @Min(value = 18, message = "未成年少女禁止入内")
     private Integer age;
 
     public Girl() {

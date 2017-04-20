@@ -1,8 +1,13 @@
-package com.girl;
+package com.girl.controller;
 
+import com.girl.domain.Girl;
+import com.girl.repository.GirlRepository;
+import com.girl.service.GirlService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -34,10 +39,11 @@ public class GirlController {
      * @return
      */
     @PostMapping(value = "/girls")
-    public Girl girlAdd(@RequestParam("name") String name, @RequestParam("age") Integer age) {
-        Girl girl = new Girl();
-        girl.setAge(age);
-        girl.setName(name);
+    public Girl girlAdd(@Valid Girl girl, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            System.out.println(bindingResult.getFieldError().getDefaultMessage());
+            return null;
+        }
         return girlRepository.save(girl);
     }
 
