@@ -1,7 +1,9 @@
 package com.girl.aspect;
 
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,8 +13,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class HttpAspect {
 
-    @Before(value = "execution(public * com.girl.controller.GirlController.*(..))")
+    @Pointcut(value = "execution(public * com.girl.controller.GirlController.*(..))")
     public void log() {
-        System.out.println("log HttpAspect !!!!!!");
     }
+
+    @Before("log()")
+    public void doBefore() {
+        System.out.println("log HttpAspect Before log !!!!!!");
+    }
+
+    @After("log()")
+    public void doAfter() {
+        System.out.println("log HttpAspect After log !!!!!!");
+    }
+
 }
