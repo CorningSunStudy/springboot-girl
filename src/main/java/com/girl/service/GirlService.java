@@ -1,5 +1,6 @@
 package com.girl.service;
 
+import com.girl.exception.GirlException;
 import com.girl.repository.GirlRepository;
 import com.girl.domain.Girl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +30,15 @@ public class GirlService {
     }
 
 
-    public String  getAge(Integer id) {
+    public void getAge(Integer id) throws Exception {
         Girl girl = girlRepository.findOne(id);
         Integer age = girl.getAge();
         if (age < 10) {
-            return "你还在上小学吧";
+            throw new GirlException("你还在上小学吧", 100);
         } else if (age > 10 && age < 16) {
-            return "你可能在上初中";
+            throw new GirlException("你可能在上初中", 101);
         }
+
     }
 
 }
